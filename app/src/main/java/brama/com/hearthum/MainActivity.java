@@ -82,6 +82,12 @@ public class MainActivity extends ActionBarActivity
                 fragmentTransaction.replace(R.id.fragment_place, fr);
                 fragmentTransaction.commit();
                 break;
+            case 4:
+                fr = new FragmentRecordPicker();
+                mTitle = getString(R.string.title_section4);
+                fragmentTransaction.replace(R.id.fragment_place, fr);
+                fragmentTransaction.commit();
+                break;
         }
     }
 

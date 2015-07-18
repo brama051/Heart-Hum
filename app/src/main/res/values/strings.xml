@@ -4,6 +4,8 @@
     <string name="title_section1">Snimanje</string>
     <string name="title_section2">Analiza</string>
     <string name="title_section3">Napredno</string>
+    <string name="title_section4">Odabir snimke</string>
+
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
