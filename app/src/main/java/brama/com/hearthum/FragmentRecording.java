@@ -24,30 +24,9 @@ public class FragmentRecording extends Fragment {
     private MediaPlayer myMediaPlayer;
     private String outputFile = null;
     Record audioFile;
+
     public FragmentRecording() {
     }
-
-    /*public void doRecord(View v){
-        try {
-            myAudioRecorder.prepare();
-            myAudioRecorder.start();
-        }
-
-        catch (IllegalStateException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        record.setEnabled(false);
-        stop.setEnabled(true);
-
-        Toast.makeText(getActivity().getApplicationContext(), "Recording started", Toast.LENGTH_LONG).show();
-    }*/
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -190,8 +169,9 @@ public class FragmentRecording extends Fragment {
             audioFile.setHeartPositionListened(btn.getText().toString());
 
             // TODO Create a new record in database with the given data and get the ID of a record
-            audioFile.setID(0);
-
+            LocalDatabaseHandler db = new LocalDatabaseHandler(getActivity());
+            audioFile.setID(db.createRecord());
+            db.updateRecord(audioFile);
             outputFile = audioFile.getFullPath();
 
             myAudioRecorder.setOutputFile(outputFile);

@@ -9,9 +9,7 @@ import android.content.ContentValues;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by ABM on 19.07.2015..
@@ -19,7 +17,7 @@ import java.util.Locale;
 public class LocalDatabaseHandler extends SQLiteOpenHelper {
     // All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
 
     // Database Name
     private static final String DATABASE_NAME = "HeartHum";
@@ -33,7 +31,7 @@ public class LocalDatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_FILEDIRECOTRY = "fileDirectory";
     private static final String KEY_FULLPATH = "fullPath";
     private static final String KEY_TIMERECORDED = "timeRecorded";
-    private static final String KEY_HEARTPOSITIONLISTENED = "heartPositionListened";
+    private static final String KEY_HEARTPOSLIS = "heartPosLis";
 
     public LocalDatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -42,15 +40,15 @@ public class LocalDatabaseHandler extends SQLiteOpenHelper {
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_RECODRINGS + "("
+        String CREATE_RECORDINGS_TABLE = "CREATE TABLE " + TABLE_RECODRINGS + "("
                 + KEY_ID + " INTEGER PRIMARY KEY,"
                 + KEY_FILENAME + " TEXT NULL,"
-                + KEY_FILEDIRECOTRY + " TEXT NULL"
-                + KEY_FULLPATH + " TEXT NULL"
-                + KEY_TIMERECORDED + " TEXT NULL"
-                + KEY_HEARTPOSITIONLISTENED + " TEXT NULL"
+                + KEY_FILEDIRECOTRY + " TEXT NULL,"
+                + KEY_FULLPATH + " TEXT NULL,"
+                + KEY_TIMERECORDED + " TEXT NULL,"
+                + KEY_HEARTPOSLIS + " TEXT NULL"
                 + ")";
-        db.execSQL(CREATE_CONTACTS_TABLE);
+        db.execSQL(CREATE_RECORDINGS_TABLE);
     }
 
     // Upgrading database
@@ -75,23 +73,24 @@ public class LocalDatabaseHandler extends SQLiteOpenHelper {
             values.put(KEY_FILEDIRECOTRY, record.getFileDirectory());
             values.put(KEY_FULLPATH, record.getFullPath());
             values.put(KEY_TIMERECORDED, df.format(record.getTimeRecorded()));
-            values.put(KEY_HEARTPOSITIONLISTENED, record.getHeartPositionListened());
+            values.put(KEY_HEARTPOSLIS, record.getHeartPositionListened());
         // Updating A Row
         check = db.update(TABLE_RECODRINGS, values, KEY_ID + " = ?", new String[]{String.valueOf(record.getID())});
         db.close(); // Closing database connection
         return check;
     }
 
+    // Creates a record in a data table and returns the ID od a created record with blank data
     public int createRecord(){
         int id = 0;
         SQLiteDatabase db = this.getWritableDatabase();
-        Record record = new Record();
+        //Record record = new Record();
         ContentValues values = new ContentValues();
-            values.put(KEY_FILENAME, "");
-            values.put(KEY_FILEDIRECOTRY, "");
-            values.put(KEY_FULLPATH, "");
-            values.put(KEY_TIMERECORDED, "");
-            values.put(KEY_HEARTPOSITIONLISTENED, "");
+            values.put(KEY_FILENAME, ".");
+            values.put(KEY_FILEDIRECOTRY, ".");
+            values.put(KEY_FULLPATH, ".");
+            values.put(KEY_TIMERECORDED, ".");
+            values.put(KEY_HEARTPOSLIS, ".");
         // Inserting Row
         db.insert(TABLE_RECODRINGS, null, values);
         db.close(); // Closing database connection
@@ -120,7 +119,7 @@ public class LocalDatabaseHandler extends SQLiteOpenHelper {
                         KEY_FILEDIRECOTRY,
                         KEY_FULLPATH,
                         KEY_TIMERECORDED,
-                        KEY_HEARTPOSITIONLISTENED}, KEY_ID + " = ?",
+                        KEY_HEARTPOSLIS}, KEY_ID + " = ?",
                         new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
