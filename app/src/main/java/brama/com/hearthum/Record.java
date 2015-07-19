@@ -11,7 +11,7 @@ public class Record {
     private String fileDirectory;
     private String fullPath;
     private Date timeRecorded;
-    private String heartPosition;
+    private String heartPositionListened;
 
     public Record() {
         this.ID = 0;
@@ -19,15 +19,24 @@ public class Record {
         this.fileDirectory = "";
         this.fullPath = "";
         this.timeRecorded = new Date();
-        this.heartPosition = "General";
+        this.heartPositionListened = "General";
     }
 
-    public String getHeartPosition() {
-        return heartPosition;
+    public Record(int ID, String fileName, String fileDirectory, String fullPath, Date timeRecorded, String heartPositionListened) {
+        this.ID = ID;
+        this.fileName = fileName;
+        this.fileDirectory = fileDirectory;
+        setFullPath();
+        this.timeRecorded = timeRecorded;
+        this.heartPositionListened = heartPositionListened;
     }
 
-    public void setHeartPosition(String heartPosition) {
-        this.heartPosition = heartPosition;
+    public String getHeartPositionListened() {
+        return heartPositionListened;
+    }
+
+    public void setHeartPositionListened(String heartPositionListened) {
+        this.heartPositionListened = heartPositionListened;
     }
 
     public Date getTimeRecorded() {

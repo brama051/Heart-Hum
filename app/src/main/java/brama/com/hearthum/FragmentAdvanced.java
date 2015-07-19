@@ -20,4 +20,6 @@ public class FragmentAdvanced extends Fragment {
         return inflater.inflate(
                 R.layout.fragment_advanced, container, false);
     }
+
+    // TODO Ability to upload existing record to amazon web services storage
 }

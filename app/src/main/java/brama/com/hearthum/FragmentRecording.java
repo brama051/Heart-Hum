@@ -187,7 +187,7 @@ public class FragmentRecording extends Fragment {
             audioFile.setFileDirectory(Environment.getExternalStorageDirectory().getAbsolutePath());
             audioFile.setFileName("HeartHum");
             audioFile.setTimeRecorded(new Date());
-            audioFile.setHeartPosition(btn.getText().toString());
+            audioFile.setHeartPositionListened(btn.getText().toString());
 
             // TODO Create a new record in database with the given data and get the ID of a record
             audioFile.setID(0);
