@@ -2,12 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#888888">
+    android:background="#eeeeeeee">
 
-    <Switch
-        android:layout_width="wrap_content"
+
+    <ListView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Odaberi fakin record"
-        android:id="@+id/switchRecording2"
-        android:layout_gravity="center_horizontal" />
+        android:id="@+id/listView" />
 </LinearLayout>
