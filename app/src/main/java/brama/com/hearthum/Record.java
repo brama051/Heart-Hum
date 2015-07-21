@@ -52,7 +52,7 @@ public class Record {
     }
 
     private void setFullPath() {
-        this.fullPath = fileDirectory + "/" + fileName + "_" + ID;
+        this.fullPath = fileDirectory + "/" + fileName + "_" + ID+ ".mp4";
     }
 
     public String getFileDirectory() {

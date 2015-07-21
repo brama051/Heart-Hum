@@ -21,13 +21,13 @@ public class FragmentAnalyze extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mVisualizerView = (VisualizerView) getActivity().findViewById(R.id.myvisualizerview);
+        /*mVisualizerView = (VisualizerView) getActivity().findViewById(R.id.myvisualizerview);
 
-        initAudio();
+        initAudio();*/
 
     }
 
-    @Override
+    /*@Override
     public void onPause() {
         super.onPause();
         if (getActivity().isFinishing() && mMediaPlayer != null) {
@@ -87,5 +87,5 @@ public class FragmentAnalyze extends Fragment {
                                                  byte[] bytes, int samplingRate) {
                     }
                 }, Visualizer.getMaxCaptureRate() / 2, true, false);
-    }
+    }*/
 }

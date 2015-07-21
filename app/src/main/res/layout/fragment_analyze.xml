@@ -4,9 +4,21 @@
     android:layout_height="match_parent"
     android:background="#EEEEEE">
 
+    <HorizontalScrollView
+        android:layout_width="500dp"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="0dp" >
 
-    <brama.com.hearthum.VisualizerView
+
+        <ImageView
+            android:id="@+id/imageHelp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/canvastest" />
+    </HorizontalScrollView>
+
+    <!--<brama.com.hearthum.VisualizerView
         android:id="@+id/myvisualizerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" />-->
 </LinearLayout>

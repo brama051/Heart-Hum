@@ -64,7 +64,7 @@ public class FragmentRecordPicker extends Fragment {
         listView.setOnLongClickListener(new View.OnLongClickListener(){
             @Override
             public boolean onLongClick(View v) {
-                Toast.makeText(getActivity(), "JEBEM TI LONG PRESS",Toast.LENGTH_LONG);
+                Toast.makeText(getActivity(), "long press ne radi",Toast.LENGTH_LONG);
                 getActivity().openContextMenu(getView());
                 return false;
             }
