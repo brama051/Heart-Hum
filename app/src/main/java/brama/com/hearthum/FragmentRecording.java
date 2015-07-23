@@ -147,8 +147,8 @@ public class FragmentRecording extends Fragment {
         public void onClick(View v) {
             myAudioRecorder=new MediaRecorder();
             myAudioRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-            myAudioRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-            myAudioRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+            myAudioRecorder.setOutputFormat(MediaRecorder.OutputFormat.AMR_NB);
+            myAudioRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
             //myAudioRecorder.setAudioEncoder(MediaRecorder.getAudioSourceMax());
             myAudioRecorder.setAudioEncodingBitRate(16);
             //myAudioRecorder.setAudioSamplingRate(96000);
