@@ -22,4 +22,6 @@ public class FragmentAdvanced extends Fragment {
     }
 
     // TODO Ability to upload existing record to amazon web services storage
+
+    // TODO Ability to check if any of records that is being analyzed remotels from amazon web services was marked as positive
 }

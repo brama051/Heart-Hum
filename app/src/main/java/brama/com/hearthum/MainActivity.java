@@ -1,6 +1,8 @@
 package brama.com.hearthum;
 
 import android.app.Activity;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
@@ -20,10 +22,21 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import brama.com.hearthum.waveform.WaveformFragment;
+
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
+    public  Record getmRecord() {
+        return mRecord;
+    }
+
+    public  void setmRecord(Record mRecordTmp) {
+       mRecord = mRecordTmp;
+    }
+
+    public  Record mRecord;
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -72,9 +85,12 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 2:
                 mTitle = getString(R.string.title_section2);
-                fr = new FragmentAnalyze();
+                //fr = new FragmentAnalyze();
+                fr = new CustomWaveformFragment();
                 fragmentTransaction.replace(R.id.fragment_place, fr);
                 fragmentTransaction.commit();
+
+                //fm.beginTransaction().add(R.id.container, new CustomWaveformFragment()).commit();
                 break;
             case 3:
                 fr = new FragmentAdvanced();
@@ -91,7 +107,16 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
+    public static class CustomWaveformFragment extends WaveformFragment {
 
+        @Override
+        protected String getFileName() {
+            return Environment.getExternalStorageDirectory().getAbsolutePath() + "/HeartHum_12.m4a";
+            //return Environment.getExternalStorageDirectory().getAbsolutePath() + "/austinpowers.wav";
+            //return Environment.getExternalStorageDirectory().getAbsolutePath() + "/hb.mp3";
+            //return  Uri.parse("android.resource://brama.com.HeartHum/" + R.raw.test).toString();
+        }
+    }
 
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();

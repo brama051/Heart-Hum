@@ -147,8 +147,8 @@ public class FragmentRecording extends Fragment {
         public void onClick(View v) {
             myAudioRecorder=new MediaRecorder();
             myAudioRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-            myAudioRecorder.setOutputFormat(MediaRecorder.OutputFormat.AMR_NB);
-            myAudioRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+            myAudioRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+            myAudioRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
             //myAudioRecorder.setAudioEncoder(MediaRecorder.getAudioSourceMax());
             myAudioRecorder.setAudioEncodingBitRate(16);
             //myAudioRecorder.setAudioSamplingRate(96000);
@@ -168,11 +168,13 @@ public class FragmentRecording extends Fragment {
             audioFile.setTimeRecorded(new Date());
             audioFile.setHeartPositionListened(btn.getText().toString());
 
-            // TODO Create a new record in database with the given data and get the ID of a record
             LocalDatabaseHandler db = new LocalDatabaseHandler(getActivity());
             audioFile.setID(db.createRecord());
             db.updateRecord(audioFile);
             outputFile = audioFile.getFullPath();
+
+            //save racording data to object in main activity
+            ((MainActivity)getActivity()).setmRecord(audioFile);
 
             myAudioRecorder.setOutputFile(outputFile);
             try {
