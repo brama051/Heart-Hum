@@ -28,15 +28,10 @@ import brama.com.hearthum.waveform.WaveformFragment;
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
-    public  Record getmRecord() {
-        return mRecord;
-    }
 
-    public  void setmRecord(Record mRecordTmp) {
-       mRecord = mRecordTmp;
-    }
 
     public  Record mRecord;
+    public String fileName ;
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -60,6 +55,7 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+        fileName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/HeartHum_12.m4a";
     }
 
     @Override
@@ -111,7 +107,8 @@ public class MainActivity extends ActionBarActivity
 
         @Override
         protected String getFileName() {
-            return Environment.getExternalStorageDirectory().getAbsolutePath() + "/HeartHum_12.m4a";
+            return ((MainActivity)getActivity()).getFileName();
+            //return Environment.getExternalStorageDirectory().getAbsolutePath() + "/HeartHum_12.m4a"; //RADI
             //return Environment.getExternalStorageDirectory().getAbsolutePath() + "/austinpowers.wav";
             //return Environment.getExternalStorageDirectory().getAbsolutePath() + "/hb.mp3";
             //return  Uri.parse("android.resource://brama.com.HeartHum/" + R.raw.test).toString();
@@ -193,5 +190,19 @@ public class MainActivity extends ActionBarActivity
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }
+    public  Record getmRecord() {
+        return mRecord;
+    }
 
+    public  void setmRecord(Record mRecordTmp) {
+        mRecord = mRecordTmp;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
 }
