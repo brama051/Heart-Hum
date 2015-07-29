@@ -175,6 +175,7 @@ public class FragmentRecording extends Fragment {
 
             //save racording data to object in main activity
             ((MainActivity)getActivity()).setmRecord(audioFile);
+            ((MainActivity)getActivity()).setFileName(audioFile.getFullPath());
 
             myAudioRecorder.setOutputFile(outputFile);
             try {

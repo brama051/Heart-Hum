@@ -13,7 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +26,21 @@ import java.util.List;
 import java.util.Map;
 
 public class FragmentRecordPicker extends Fragment {
-    ListView listView;
+    @Override
+    public View onCreateView(LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+
+        //Inflate the layout for this fragment
+        LayoutInflater layoutInflaterForButton = getActivity().getLayoutInflater();
+        LinearLayout btnContainer = (LinearLayout)getView().findViewById(R.id.listContainer);
+        for (int noOfButton = 0; noOfButton < 5; noOfButton++) {
+            LinearLayout btnView = (LinearLayout) layoutInflaterForButton.inflate(R.layout.element_record_picker, null);
+            btnContainer.addView(btnView);
+        }
+        return inflater.inflate(R.layout.fragment_record_picker, container, false);
+    }
+
+    /*ListView listView;
 
     List<Map<String, String>> planetsList;
 
@@ -102,5 +118,5 @@ public class FragmentRecordPicker extends Fragment {
         // Implements our logic
         Toast.makeText(getActivity(), "Item id ["+itemId+"]", Toast.LENGTH_SHORT).show();
         return true;
-    }
+    }*/
 }

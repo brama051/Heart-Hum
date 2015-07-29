@@ -2,11 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#eeeeeeee">
+    android:background="#eeeeeeee"
+    android:id="@+id/listContainer">
 
 
-    <ListView
+    <!--ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listView" />
+        android:id="@+id/listView" /-->
 </LinearLayout>
