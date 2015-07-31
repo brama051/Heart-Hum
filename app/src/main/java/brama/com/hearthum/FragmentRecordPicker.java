@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
+// Todo change colors and fix menus
 public class FragmentRecordPicker extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,

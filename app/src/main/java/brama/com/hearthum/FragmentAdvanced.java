@@ -21,6 +21,7 @@ public class FragmentAdvanced extends Fragment {
                 R.layout.fragment_advanced, container, false);
     }
 
+
     // TODO Ability to upload existing record to amazon web services storage
 
     // TODO Ability to check if any of records that is being analyzed remotely

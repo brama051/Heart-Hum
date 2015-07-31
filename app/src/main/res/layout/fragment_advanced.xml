@@ -2,12 +2,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EEEEEE">
+    android:background="#EEEEEE"
+    android:gravity="center"
+    android:layout_margin="16dp">
 
     <Switch
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Start"
-        android:id="@+id/switchRecording2"
-        android:layout_gravity="center_horizontal" />
+        android:text="Automatically upload to AWS"
+        android:id="@+id/switchAmazonWS"
+        android:layout_gravity="center_horizontal"
+        android:gravity="fill_vertical" />
+    <Switch
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Periodically check for online diagnosis"
+        android:id="@+id/switchListenBeacon"
+        android:layout_gravity="center_horizontal"
+        android:gravity="fill_vertical" />
+    <Switch
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="E-mail me in case of positive result"
+        android:id="@+id/switchEmailNotif"
+        android:layout_gravity="center_horizontal"
+        android:gravity="fill_vertical" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:singleLine="true"
+        android:hint="e-mail"/>
+
 </LinearLayout>
