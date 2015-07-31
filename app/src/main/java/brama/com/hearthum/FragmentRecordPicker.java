@@ -5,6 +5,7 @@ package brama.com.hearthum;
  */
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -50,6 +51,8 @@ public class FragmentRecordPicker extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         TextView text = new TextView(getActivity());
+        final int button1id = View.generateViewId();
+        text.setId(button1id); // id
         text.setText("RADI LI OVO");
         text.setLayoutParams(new LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         text.setBackgroundColor(542);
@@ -57,7 +60,8 @@ public class FragmentRecordPicker extends Fragment {
         text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "tekst kliknut", Toast.LENGTH_LONG);
+                Toast.makeText(getActivity(), "tekst kliknut", Toast.LENGTH_LONG).show();
+                text.setBackgroundColor(R.drawable.abc_list_pressed_holo_dark);
             }
         });
         LinearLayout linearLayout = (LinearLayout)getActivity().findViewById(R.id.listContainer);
@@ -65,25 +69,26 @@ public class FragmentRecordPicker extends Fragment {
 
         //ovako se uèitava custom layout u postojeæi
         View headerView = View.inflate(getActivity(), R.layout.element_record_picker, null);
-        //View headerView = View.inflate(getActivity(), R.layout.element_record_picker, linearLayout);
-        view.setClickable(true);
-        view.setOnClickListener(new View.OnClickListener() {
+
+        //OVO RADI
+        /*TextView text2 = (TextView)headerView.findViewById(R.id.textViewFileName);
+        text2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "layout kliknut", Toast.LENGTH_LONG);
+                Toast.makeText(getActivity(), "tekst kliknut", Toast.LENGTH_LONG).show();
 
             }
         });
-
-        view.setOnTouchListener(new View.OnTouchListener() {
+        text2.setLongClickable(true);
+        text2.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                Toast.makeText(getActivity(), "layout OnTouch", Toast.LENGTH_LONG);
-
+            public boolean onLongClick(View v) {
+                headerView.setBackgroundColor(R.drawable.abc_list_pressed_holo_dark);
 
                 return false;
             }
-        });
+        });*/
+
         linearLayout.addView(headerView);
     }
 
