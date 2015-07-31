@@ -6,6 +6,16 @@
     android:gravity="center"
     android:layout_margin="16dp">
 
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Upload all now"
+        android:id="@+id/btnUpload" />
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Check for positive diagnosis"
+        android:id="@+id/btnCheckDiagnosis" />
     <Switch
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -33,7 +43,7 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/editText"
+        android:id="@+id/emailTextEdit"
         android:singleLine="true"
         android:hint="e-mail"/>
 

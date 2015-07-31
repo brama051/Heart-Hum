@@ -1,6 +1,7 @@
 package brama.com.hearthum;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
@@ -28,7 +29,8 @@ import brama.com.hearthum.waveform.WaveformFragment;
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
-
+    // Todo create background worker that will activate on every preference check and do tasks
+    //
 
     public  Record mRecord;
     public String fileName ;
@@ -55,8 +57,21 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-        fileName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/HeartHum_12.m4a";
+        fileName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/HeartHum_1.m4a";
+
+        //preferences
+        SharedPreferences.OnSharedPreferenceChangeListener spChanged = new
+                SharedPreferences.OnSharedPreferenceChangeListener() {
+                    @Override
+                    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
+                                                          String key) {
+                        // Todo check values from preferences and do tasks according to that
+
+                    }
+                };
     }
+
+
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
