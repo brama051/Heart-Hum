@@ -10,11 +10,11 @@
     <color name="timecode_shadow">#aa000000</color>
 </resources-->
 <resources>
-    <color name="waveform_selected">#8dffff</color>
-    <color name="waveform_unselected">#106072</color>
+    <color name="waveform_selected">#33335f</color>
+    <color name="waveform_unselected">#a2a2b9</color>
     <color name="waveform_unselected_bkgnd_overlay">#33000000</color>
     <color name="selection_border">#ffffff</color>
-    <color name="playback_indicator">#ffff66</color>
+    <color name="playback_indicator">#c8ff0000</color>
     <color name="grid_line">#66ffffff</color>
     <color name="timecode">#ddffffdd</color>
     <color name="timecode_shadow">#aa000000</color>

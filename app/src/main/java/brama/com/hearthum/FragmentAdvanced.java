@@ -9,7 +9,8 @@ import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+// TODO save and load data from shared preferendes
+// http://stackoverflow.com/questions/23024831/android-shared-preferences-example
 public class FragmentAdvanced extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,

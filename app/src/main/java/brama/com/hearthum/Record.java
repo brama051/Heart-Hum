@@ -52,7 +52,7 @@ public class Record {
     }
 
     private void setFullPath() {
-        this.fullPath = fileDirectory + "/" + fileName + "_" + ID+ ".m4a";
+        this.fullPath = fileDirectory + "/" + fileName + "_" + ID + R.string.file_extension;
     }
 
     public String getFileDirectory() {

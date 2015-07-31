@@ -99,7 +99,7 @@ public class FragmentRecordPicker extends Fragment {
             headerView[i] = View.inflate(getActivity(), R.layout.element_record_picker, null);
             TextView txtFileName = (TextView) headerView[i].findViewById(R.id.textViewFileName);
             TextView txtFileDesc = (TextView) headerView[i].findViewById(R.id.textViewDescription);
-            txtFileName.setText(r.getFileName());
+            txtFileName.setText(r.getFileName() + "_" + r.getID() + R.string.file_extension);
             txtFileDesc.setText(r.getFileDirectory() + "\n" + r.getTimeRecorded() + "\n" + r.getHeartPositionListened());
             headerView[i].setOnClickListener(new View.OnClickListener() {
                 @Override
