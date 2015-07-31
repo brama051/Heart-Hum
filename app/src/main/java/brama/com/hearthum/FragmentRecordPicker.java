@@ -4,13 +4,16 @@ package brama.com.hearthum;
  * Created by ABM on 18.07.2015..
  */
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
@@ -24,6 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeoutException;
 
 public class FragmentRecordPicker extends Fragment {
     @Override
@@ -31,13 +35,56 @@ public class FragmentRecordPicker extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         //Inflate the layout for this fragment
-        LayoutInflater layoutInflaterForButton = getActivity().getLayoutInflater();
-        LinearLayout btnContainer = (LinearLayout)getView().findViewById(R.id.listContainer);
-        for (int noOfButton = 0; noOfButton < 5; noOfButton++) {
-            LinearLayout btnView = (LinearLayout) layoutInflaterForButton.inflate(R.layout.element_record_picker, null);
-            btnContainer.addView(btnView);
-        }
+        /*TextView text = new TextView(getActivity());
+        text.setText("RADI LI OVO");
+        text.setLayoutParams(new LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+        LinearLayout linearLayout = (LinearLayout)getActivity().findViewById(R.id.listContainer);
+
+        linearLayout.addView(text);*/
         return inflater.inflate(R.layout.fragment_record_picker, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        TextView text = new TextView(getActivity());
+        text.setText("RADI LI OVO");
+        text.setLayoutParams(new LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        text.setBackgroundColor(542);
+        text.setClickable(true);
+        text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "tekst kliknut", Toast.LENGTH_LONG);
+            }
+        });
+        LinearLayout linearLayout = (LinearLayout)getActivity().findViewById(R.id.listContainer);
+        linearLayout.addView(text);
+
+        //ovako se uèitava custom layout u postojeæi
+        View headerView = View.inflate(getActivity(), R.layout.element_record_picker, null);
+        //View headerView = View.inflate(getActivity(), R.layout.element_record_picker, linearLayout);
+        view.setClickable(true);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "layout kliknut", Toast.LENGTH_LONG);
+
+            }
+        });
+
+        view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Toast.makeText(getActivity(), "layout OnTouch", Toast.LENGTH_LONG);
+
+
+                return false;
+            }
+        });
+        linearLayout.addView(headerView);
     }
 
     /*ListView listView;
