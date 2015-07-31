@@ -14,11 +14,15 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
-            android:id="@+id/textViewFileName" />
+            android:id="@+id/textViewFileName"
+            android:duplicateParentState="true"
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Text"
-            android:id="@+id/textViewDescription" />
+            android:id="@+id/textViewDescription"
+            android:duplicateParentState="true"
+            />
     </LinearLayout>

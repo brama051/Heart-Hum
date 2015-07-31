@@ -4,23 +4,14 @@ package brama.com.hearthum;
  * Created by ABM on 18.07.2015..
  */
 
-import android.content.Context;
-import android.graphics.Color;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,7 +59,6 @@ public class FragmentRecordPicker extends Fragment {
         linearLayout.addView(text);
 
         //ovako se uèitava custom layout u postojeæi
-        View headerView = View.inflate(getActivity(), R.layout.element_record_picker, null);
 
         //OVO RADI
         /*TextView text2 = (TextView)headerView.findViewById(R.id.textViewFileName);
@@ -88,8 +78,38 @@ public class FragmentRecordPicker extends Fragment {
                 return false;
             }
         });*/
+        List<Record> recordList = new ArrayList<Record>();
 
-        linearLayout.addView(headerView);
+        LocalDatabaseHandler db = new LocalDatabaseHandler(getActivity());
+        try{
+            recordList = db.getAllRecords();
+            text.setText("There are " + recordList.size()
+                    + " records" );
+        }catch (Exception e){
+            // Todo database error handling
+            text.setText("Error in database" );
+        }
+
+
+
+        View[] headerView = new View[recordList.size()];
+        int i = 0;
+        for (Record r : recordList){
+            headerView[i] = View.inflate(getActivity(), R.layout.element_record_picker, null);
+            TextView txtFileName = (TextView) headerView[i].findViewById(R.id.textViewFileName);
+            TextView txtFileDesc = (TextView) headerView[i].findViewById(R.id.textViewDescription);
+            txtFileName.setText(r.getFileName());
+            txtFileDesc.setText(r.getFileDirectory() + "\n" + r.getTimeRecorded() + "\n" + r.getHeartPositionListened());
+            headerView[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getActivity(), r.getFullPath() + " SELECTED", Toast.LENGTH_LONG).show();
+                    ((MainActivity)getActivity()).setFileName(r.getFullPath());
+                }
+            });
+            linearLayout.addView(headerView[i]);
+            i++;
+        }
     }
 
     /*ListView listView;
