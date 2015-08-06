@@ -167,6 +167,7 @@ public class FragmentRecording extends Fragment {
             audioFile.setFileName("HeartHum");
             audioFile.setTimeRecorded(new Date());
             audioFile.setHeartPositionListened(btn.getText().toString());
+            audioFile.setExtension(getResources().getString(R.string.file_extension));
 
             LocalDatabaseHandler db = new LocalDatabaseHandler(getActivity());
             audioFile.setID(db.createRecord());

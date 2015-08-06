@@ -13,6 +13,16 @@ public class Record {
     private Date timeRecorded;
     private String heartPositionListened;
 
+    public String getExtension() {
+        return extension;
+    }
+
+    public void setExtension(String extension) {
+        this.extension = extension;
+    }
+
+    private String extension;
+
     public Record() {
         this.ID = 0;
         this.fileName = "";
@@ -29,6 +39,7 @@ public class Record {
         setFullPath();
         this.timeRecorded = timeRecorded;
         this.heartPositionListened = heartPositionListened;
+
     }
 
     public String getHeartPositionListened() {
@@ -52,7 +63,7 @@ public class Record {
     }
 
     private void setFullPath() {
-        this.fullPath = fileDirectory + "/" + fileName + "_" + ID + R.string.file_extension;
+        this.fullPath = fileDirectory + "/" + fileName + "_" + ID + ".m4a";
     }
 
     public String getFileDirectory() {

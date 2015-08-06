@@ -85,7 +85,7 @@ public class FragmentRecordPicker extends Fragment {
             itemView[i] = View.inflate(getActivity(), R.layout.element_record_picker, null);
             TextView txtFileName = (TextView) itemView[i].findViewById(R.id.textViewFileName);
             TextView txtFileDesc = (TextView) itemView[i].findViewById(R.id.textViewDescription);
-            txtFileName.setText(r.getFileName() + "_" + r.getID() + getResources().getString(R.string.file_extension));
+            txtFileName.setText(r.getFileName() + "_" + r.getID() + ".m4a");
             txtFileDesc.setText(r.getFileDirectory() + "\n" + r.getTimeRecorded() + "\n" + r.getHeartPositionListened());
             itemView[i].setOnClickListener(new View.OnClickListener() {
                 @Override

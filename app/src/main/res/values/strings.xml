@@ -1,16 +1,16 @@
 <resources>
     <string name="app_name">Heart Hum</string>
 
-    <string name="title_section1">Snimanje</string>
-    <string name="title_section2">Analiza</string>
-    <string name="title_section3">Napredno</string>
-    <string name="title_section4">Odabir snimke</string>
+    <string name="title_section1">Recording</string>
+    <string name="title_section2">Analysis</string>
+    <string name="title_section3">Advanced</string>
+    <string name="title_section4">Select previous recording</string>
 
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_example">Example action</string>
+    <string name="action_example"> </string>
 
     <string name="action_settings">Settings</string>
 
