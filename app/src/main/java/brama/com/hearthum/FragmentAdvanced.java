@@ -4,11 +4,7 @@ package brama.com.hearthum;
  * Created by ABM on 17.07.2015..
  */
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -25,25 +21,13 @@ import android.os.AsyncTask;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -57,6 +41,9 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+
+import brama.com.hearthum.entities.FileUploadResponse;
+import brama.com.hearthum.entities.MultipleFileUploadResponse;
 
 
 // TODO save and load data from shared preferendes
@@ -188,24 +175,11 @@ public class FragmentAdvanced extends Fragment {
     }
 
     public void uploadFile(){
-        /*String filePath = ((MainActivity) getActivity()).getFileName();
-        AWSCredentials credentials = new BasicAWSCredentials(S3_ACCESS_KEY, S3_SECRET);
-        TransferManager manager = new TransferManager(credentials);
-        try {
-            Upload upload = manager.upload(S3_BUCKETNAME, "TEST.m4a", new File(filePath));
-            while (upload.isDone() == false) {
-                //System.out.println(upload.getProgress().getPercentTransferred() + "%");
-                txtStatus.setText(upload.getProgress().getPercentTransferred() + "%");
-            }
-            txtStatus.setText("100%\n" + upload.getDescription());
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }*/
+        //String filePath = ((MainActivity) getActivity()).getFileName();
 
 
 
-        File file = new File(((MainActivity) getActivity()).getFileName());
+
         //new HttpRequestTask().execute();
 
         //DOBAR, RADI
@@ -215,31 +189,27 @@ public class FragmentAdvanced extends Fragment {
         String filesPaths[] = null;
         try{
             recordList = db.getAllRecords();
-            filesPaths = new String[recordList.size()];
+            filesPaths = new String[recordList.size()+1];
             Log.d("Files to upload", String.format("%d", recordList.size()));
-            int i = 0;
+            int i = 1;
+            filesPaths[0] = emailEditText.getText().toString();
             for (Record r : recordList){
                 filesPaths[i]=r.getFullPath();
                 Log.d("About to upload:", filesPaths[i]);
                 i++;
 
             }
+
+            //String[] fileAndEmail = new String[2];
+            //fileAndEmail[0] = e ;
+            //fileAndEmail[1] = emailEditText.getText().toString();
             new MultipleFileUpload().execute(filesPaths);
-        }catch (Exception e){
+            //new FileUpload().execute(((MainActivity) getActivity()).getFileName());
+
+        }catch (Exception e) {
             // Todo database error handling
             e.printStackTrace();
         }
-
-        //RADI
-        //new FileUpload().execute(filesPaths);
-
-
-
-        //new FileUpload().execute(((MainActivity) getActivity()).getFileName());
-        // /new LongOperation().execute("http://192.168.1.182:8080/HeartHumWS/rs/service/getSomething?request=oleeeeeeeeee");
-        //new FileUpload().execute("http://localhost:8080/HeartHumWS/rs/service/postRealFile", ((MainActivity) getActivity()).getFileName());
-
-
     }
 
     public void loadSettings(){
@@ -295,6 +265,7 @@ public class FragmentAdvanced extends Fragment {
                 restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
                 // Make the HTTP GET request, marshaling the response to a String
                 String result = restTemplate.getForObject(url, String.class, "Android");
+
                 return result;
             } catch (Exception e) {
                 Log.e("MainActivity", e.getMessage(), e);
@@ -309,15 +280,15 @@ public class FragmentAdvanced extends Fragment {
         }
     }
 
-    private class FileUpload extends AsyncTask<String, Void, ResponseEntity<String>> {
+    private class FileUpload extends AsyncTask<String, Void, FileUploadResponse> {
 
         String urlLocation="no_loc";
         String fileLocation="no_file";
         TextView txt;
 
         @Override
-        protected ResponseEntity<String> doInBackground(String... params) {
-            ResponseEntity<String> responseEntity=null;
+        protected FileUploadResponse doInBackground(String... params) {
+            FileUploadResponse responseEntity=null;
 
                 FormHttpMessageConverter formHttpMessageConverter = new FormHttpMessageConverter();
                 formHttpMessageConverter.setCharset(Charset.forName("UTF8"));
@@ -328,11 +299,11 @@ public class FragmentAdvanced extends Fragment {
                 restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
 
                 String uri = "http://192.168.1.182:8080/fileUpload";
-                String filePath = params[0];
+                String filePath = params[1];
                 File file = new File(filePath);
 
                 MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-                map.add("name", file.getName()+".m4a");
+                map.add("email", params[0]);
                 map.add("file", new FileSystemResource(filePath));
 
                 HttpHeaders imageHeaders = new HttpHeaders();
@@ -341,19 +312,21 @@ public class FragmentAdvanced extends Fragment {
                 HttpEntity<MultiValueMap<String, Object>> imageEntity = new HttpEntity<MultiValueMap<String, Object>>(map, imageHeaders);
 
                 try {
-                    responseEntity = restTemplate.exchange(uri, HttpMethod.POST, imageEntity, String.class);
+                    //responseEntity = restTemplate.exchange(uri, HttpMethod.POST, imageEntity, String.class);
+                    responseEntity = restTemplate.postForObject(uri, imageEntity, FileUploadResponse.class);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
-
 
             return responseEntity;
         }
 
         @Override
-        protected void onPostExecute(ResponseEntity<String> result) {
-            if(result != null){
-                Toast.makeText(getActivity(), result.toString(), Toast.LENGTH_SHORT).show();
+        protected void onPostExecute(FileUploadResponse result) {
+            if(result != null ){
+                // TODO ZABILJEŽITI U BAZU SVE KOJI SU UPLOADANI, TJ KOJIMA URL NIJE NULL
+                Log.d("postForObject:", result.toString());
+                Toast.makeText(getActivity(), result.getPath() + "\n" + result.getUrl(), Toast.LENGTH_SHORT).show();
             }else {
                 Toast.makeText(getActivity(), "response failed", Toast.LENGTH_LONG).show();
             }
@@ -362,17 +335,17 @@ public class FragmentAdvanced extends Fragment {
 
     }
 
-    private class MultipleFileUpload extends AsyncTask<String, Void, ResponseEntity<String>> {
+    private class MultipleFileUpload extends AsyncTask<String, Void, MultipleFileUploadResponse> {
 
         String urlLocation="no_loc";
         String fileLocation="no_file";
         TextView txt;
 
         @Override
-        protected ResponseEntity<String> doInBackground(String... params) {
+        protected MultipleFileUploadResponse doInBackground(String... params) {
             try {
 
-                ResponseEntity<String> responseEntity = null;
+                MultipleFileUploadResponse responseEntity = null;
 
                 FormHttpMessageConverter formHttpMessageConverter = new FormHttpMessageConverter();
                 formHttpMessageConverter.setCharset(Charset.forName("UTF8"));
@@ -381,21 +354,18 @@ public class FragmentAdvanced extends Fragment {
                 restTemplate.getMessageConverters().add(formHttpMessageConverter);
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
-
+                String email = params[0];
                 String uri = "http://192.168.1.182:8080/multipleFileUpload";
-                String filePath[] = new String[params.length];
-                File file[] = new File[params.length];
+                String filePath[] = new String[params.length-1];
+                File file[] = new File[params.length-1];
                 MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-                for (int i = 0; i < params.length; i++) {
+                map.add("email", email);
+                for (int i = 1; i < params.length; i++) {
                     Log.d("Ubacivanje elemenata", "file: " + params[i]);
-                    filePath[i] = params[i];
-                    file[i] = new File(filePath[i]);
-                    map.add("file", new FileSystemResource(filePath[i]));
+                    filePath[i-1] = params[i];
+                    file[i-1] = new File(filePath[i-1]);
+                    map.add("file", new FileSystemResource(filePath[i-1]));
                 }
-
-
-                //map.add("name", file.getName()+".m4a");
-
 
                 HttpHeaders imageHeaders = new HttpHeaders();
                 imageHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
@@ -403,7 +373,7 @@ public class FragmentAdvanced extends Fragment {
                 HttpEntity<MultiValueMap<String, Object>> imageEntity = new HttpEntity<MultiValueMap<String, Object>>(map, imageHeaders);
 
                 try {
-                    responseEntity = restTemplate.exchange(uri, HttpMethod.POST, imageEntity, String.class);
+                    responseEntity = restTemplate.postForObject(uri, imageEntity, MultipleFileUploadResponse.class);
                 } catch (Exception e) {
                     Log.e("MultipleFileUpload", "Greska kod exchange: " + e.getMessage());
                     e.printStackTrace();
@@ -419,11 +389,11 @@ public class FragmentAdvanced extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(ResponseEntity<String> result) {
+        protected void onPostExecute(MultipleFileUploadResponse result) {
             if(result != null){
-                String body = result.getBody();
-                Log.d("postRequestresult", body);
-                Toast.makeText(getActivity(), body, Toast.LENGTH_SHORT).show();
+                //String body = result.getBody();
+                Log.d("postRequestresult", result.toString());
+                Toast.makeText(getActivity(), result.toString(), Toast.LENGTH_SHORT).show();
             }else {
                 Toast.makeText(getActivity(), "response is null", Toast.LENGTH_LONG).show();
             }
