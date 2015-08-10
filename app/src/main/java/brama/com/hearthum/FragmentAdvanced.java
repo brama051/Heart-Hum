@@ -62,9 +62,6 @@ import org.springframework.web.client.RestTemplate;
 // TODO save and load data from shared preferendes
 // http://stackoverflow.com/questions/23024831/android-shared-preferences-example
 public class FragmentAdvanced extends Fragment {
-    private static final String S3_ACCESS_KEY = "AKIAJQOEY2INBUEDHDGQ";
-    private static final String S3_SECRET = "Nu5tgPgLuvanSFkIkzKAfh/6HayD0F6JhsuPHykt";
-    private static final String S3_BUCKETNAME = "hearthum.files";
     private static final String TAG = "upload";
 
 
