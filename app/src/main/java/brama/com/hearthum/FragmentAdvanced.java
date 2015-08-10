@@ -175,13 +175,6 @@ public class FragmentAdvanced extends Fragment {
     }
 
     public void uploadFile(){
-        //String filePath = ((MainActivity) getActivity()).getFileName();
-
-
-
-
-        //new HttpRequestTask().execute();
-
         //DOBAR, RADI
         //new HttpPostTask().execute();
         List<Record> recordList = new ArrayList<Record>();
@@ -253,34 +246,9 @@ public class FragmentAdvanced extends Fragment {
         }
     }
 
-    private class HttpPostTask extends AsyncTask<Void, Void, String> {
-        @Override
-        protected String doInBackground(Void... params) {
-            try {
-                // The connection URL
-                String url = "192.168.1.182/greeting";
-                // Create a new RestTemplate instance
-                RestTemplate restTemplate = new RestTemplate();
-                // Add the String message converter
-                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
-                // Make the HTTP GET request, marshaling the response to a String
-                String result = restTemplate.getForObject(url, String.class, "Android");
 
-                return result;
-            } catch (Exception e) {
-                Log.e("MainActivity", e.getMessage(), e);
 
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String string) {
-            Toast.makeText(getActivity(), string, Toast.LENGTH_LONG).show();
-        }
-    }
-
-    private class FileUpload extends AsyncTask<String, Void, FileUploadResponse> {
+    public class FileUpload extends AsyncTask<String, Void, FileUploadResponse> {
 
         String urlLocation="no_loc";
         String fileLocation="no_file";
@@ -401,4 +369,6 @@ public class FragmentAdvanced extends Fragment {
 
 
     }
+
+
 }
