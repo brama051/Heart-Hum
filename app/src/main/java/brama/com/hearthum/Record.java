@@ -12,6 +12,7 @@ public class Record {
     private String fullPath;
     private Date timeRecorded;
     private String heartPositionListened;
+    private int isUploaded;
 
     public String getExtension() {
         return extension;
@@ -30,16 +31,17 @@ public class Record {
         this.fullPath = "";
         this.timeRecorded = new Date();
         this.heartPositionListened = "General";
+        this.isUploaded = 0;
     }
 
-    public Record(int ID, String fileName, String fileDirectory, String fullPath, Date timeRecorded, String heartPositionListened) {
+    public Record(int ID, String fileName, String fileDirectory, String fullPath, Date timeRecorded, String heartPositionListened, int isUploaded) {
         this.ID = ID;
         this.fileName = fileName;
         this.fileDirectory = fileDirectory;
         setFullPath();
         this.timeRecorded = timeRecorded;
         this.heartPositionListened = heartPositionListened;
-
+        this.isUploaded = isUploaded;
     }
 
     public String getHeartPositionListened() {
@@ -91,5 +93,13 @@ public class Record {
     public void setID(int ID) {
         this.ID = ID;
         setFullPath();
+    }
+
+    public int getIsUploaded() {
+        return isUploaded;
+    }
+
+    public void setIsUploaded(int isUploaded) {
+        this.isUploaded = isUploaded;
     }
 }

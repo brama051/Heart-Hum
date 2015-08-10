@@ -58,7 +58,7 @@ public class FragmentRecordPicker extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "tekst kliknut", Toast.LENGTH_LONG).show();
-                text.setBackgroundColor(R.drawable.abc_list_pressed_holo_dark);
+                //text.setBackgroundColor(getResources().));
             }
         });
         LinearLayout linearLayout = (LinearLayout)getActivity().findViewById(R.id.listContainer);
@@ -76,8 +76,6 @@ public class FragmentRecordPicker extends Fragment {
             // Todo database error handling
             text.setText("Error in database" );
         }
-
-
 
         itemView = new View[recordList.size()];
         int i = 0;

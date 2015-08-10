@@ -168,6 +168,7 @@ public class FragmentRecording extends Fragment {
             audioFile.setTimeRecorded(new Date());
             audioFile.setHeartPositionListened(btn.getText().toString());
             audioFile.setExtension(getResources().getString(R.string.file_extension));
+            audioFile.setIsUploaded(0);
 
             LocalDatabaseHandler db = new LocalDatabaseHandler(getActivity());
             audioFile.setID(db.createRecord());
